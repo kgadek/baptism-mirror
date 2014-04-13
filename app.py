@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os
-from os import environ as env
 from sys import argv
 
+import os
+from os import environ as env
 import bottle
-from bottle import default_app, request, route, response, get
+from bottle import request, response, get, post, HTTPResponse
+
 
 bottle.debug(True)
 
@@ -29,5 +30,26 @@ def index():
         ret += '%s=%s\n' % (k, v)
 
     return ret
+
+
+@post('/example_post/<doc_id>')
+def example_post(doc_id):
+    # yes, this is a sec–hole :) if you're bored: do whatever you like!
+    doc_file = os.path.join("tmp", doc_id)
+
+    with open(doc_file, "w") as fh:
+        content = request.forms.get('content')[0:100]
+        fh.write(content)
+
+
+@get('/example_get/<doc_id>')
+def example_get(doc_id):
+    # yes, this is a sec–hole :) if you're bored: do whatever you like!
+    doc_file = os.path.join("tmp", doc_id)
+    with open(doc_file, "r") as fh:
+        return fh.read()
+    # noinspection PyUnreachableCode
+    return HTTPResponse("No such file!", status=400)
+
 
 bottle.run(host='0.0.0.0', port=argv[1])
