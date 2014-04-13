@@ -1,0 +1,28 @@
+2014-06-09 19:04:03,194 - spam_application - INFO - OKAY, let's start
+2014-06-09 19:04:12,982 - spam_application - INFO - OKAY, let's start
+2014-06-09 19:05:04,109 - spam_application - INFO - We've got new pushed data!
+2014-06-09 19:05:10,236 - spam_application - INFO - We've got new pushed data!
+2014-06-09 19:05:17,306 - spam_application - INFO - We've got new pushed data!
+2014-06-09 19:05:35,652 - spam_application - INFO - We've got new pushed data!
+2014-06-15 22:44:14,762 - spam_application - INFO - OKAY, let's start
+2014-06-15 22:44:22,776 - spam_application - INFO - /
+<pre><code style="padding: 0.5em 0 0.5em 1em; border-radius: 6px; border-width: 1px 1px 1px 6px;border-color: #eee #eee #eee #aa1e2d; border-style: solid; font-family: monospace;">2014-06-15 23:25:12,441 - baptism - INFO - logger initialized</code></pre>
+<pre><code style="padding: 0.5em 0 0.5em 1em; border-radius: 6px; border-width: 1px 1px 1px 6px;border-color: #eee #eee #eee #aa1e2d; border-style: solid; font-family: monospace;">2014-06-15 23:25:12,441 - baptism - INFO - starting bottle</code></pre>
+<pre><code style="padding: 0.5em 0 0.5em 1em; border-radius: 6px; border-width: 1px 1px 1px 6px;border-color: #eee #eee #eee #aa1e2d; border-style: solid; font-family: monospace;">2014-06-15 23:25:21,227 - baptism - INFO - /</code></pre>
+<pre><code style="padding: 0.5em 0 0.5em 1em; border-radius: 6px; border-width: 1px 1px 1px 6px;border-color: #eee #eee #eee #aa1e2d; border-style: solid; font-family: monospace;">2014-06-15 23:25:36,987 - baptism - INFO - /</code></pre>
+<pre><code style="padding: 0.5em 0 0.5em 1em; border-radius: 6px; border-width: 1px 1px 1px 6px;border-color: #eee #eee #eee #aa1e2d; border-style: solid; font-family: monospace;">2014-06-15 23:25:38,891 - baptism - INFO - /</code></pre>
+<pre><code style="padding: 0.5em 0 0.5em 1em; border-radius: 6px; border-width: 1px 1px 1px 6px;border-color: #eee #eee #eee #aa1e2d; border-style: solid; font-family: monospace;">2014-06-15 23:25:39,662 - baptism - INFO - /</code></pre>
+<pre><code style="padding: 0.5em 0 0.5em 1em; border-radius: 6px; border-width: 1px 1px 1px 6px;border-color: #eee #eee #eee #aa1e2d; border-style: solid; font-family: monospace;">2014-06-15 23:25:43,566 - baptism - INFO - /</code></pre>
+<pre><code style="padding: 0.5em 0 0.5em 1em; border-radius: 6px; border-width: 1px 1px 1px 6px;border-color: #eee #eee #eee #aa1e2d; border-style: solid; font-family: monospace;">2014-06-15 23:25:44,619 - baptism - INFO - /logs</code></pre>
+<pre><code style="padding: 0.5em 0 0.5em 1em; border-radius: 6px; border-width: 1px 1px 1px 6px;border-color: #eee #eee #eee #aa1e2d; border-style: solid; font-family: monospace;">2014-06-15 23:25:44,620 - baptism - DEBUG - trying to open log file</code></pre>
+<pre><code style="padding: 0.5em 0 0.5em 1em; border-radius: 6px; border-width: 1px 1px 1px 6px;border-color: #eee #eee #eee #aa1e2d; border-style: solid; font-family: monospace;">2014-06-15 23:25:44,620 - baptism - DEBUG - opened successfully</code></pre>
+<pre><code style="padding: 0.5em 0 0.5em 1em; border-radius: 6px; border-width: 1px 1px 1px 6px;border-color: #eee #eee #eee #aa1e2d; border-style: solid; font-family: monospace;">2014-06-16 18:18:33,768 - app.py:36 - INFO - logger initialized</code></pre>
+<pre><code style="padding: 0.5em 0 0.5em 1em; border-radius: 6px; border-width: 1px 1px 1px 6px;border-color: #eee #eee #eee #aa1e2d; border-style: solid; font-family: monospace;">2014-06-16 18:18:33,769 - app.py:294 - INFO - starting bottle</code></pre>
+<pre><code style="padding: 0.5em 0 0.5em 1em; border-radius: 6px; border-width: 1px 1px 1px 6px;border-color: #eee #eee #eee #aa1e2d; border-style: solid; font-family: monospace;">2014-06-16 18:19:06,135 - app.py:36 - INFO - logger initialized</code></pre>
+<pre><code style="padding: 0.5em 0 0.5em 1em; border-radius: 6px; border-width: 1px 1px 1px 6px;border-color: #eee #eee #eee #aa1e2d; border-style: solid; font-family: monospace;">2014-06-16 18:19:06,135 - app.py:36 - INFO - logger initialized</code></pre>
+<pre><code style="padding: 0.5em 0 0.5em 1em; border-radius: 6px; border-width: 1px 1px 1px 6px;border-color: #eee #eee #eee #aa1e2d; border-style: solid; font-family: monospace;">2014-06-16 18:19:06,135 - app.py:294 - INFO - starting bottle</code></pre>
+<pre><code style="padding: 0.5em 0 0.5em 1em; border-radius: 6px; border-width: 1px 1px 1px 6px;border-color: #eee #eee #eee #aa1e2d; border-style: solid; font-family: monospace;">2014-06-16 18:19:06,135 - app.py:294 - INFO - starting bottle</code></pre>
+<pre><code style="padding: 0.5em 0 0.5em 1em; border-radius: 6px; border-width: 1px 1px 1px 6px;border-color: #eee #eee #eee #aa1e2d; border-style: solid; font-family: monospace;">2014-06-16 18:32:11,574 - app.py:36 - INFO - logger initialized</code></pre>
+<pre><code style="padding: 0.5em 0 0.5em 1em; border-radius: 6px; border-width: 1px 1px 1px 6px;border-color: #eee #eee #eee #aa1e2d; border-style: solid; font-family: monospace;">2014-06-16 18:32:11,574 - app.py:296 - INFO - starting bottle</code></pre>
+<pre><code style="padding: 0.5em 0 0.5em 1em; border-radius: 6px; border-width: 1px 1px 1px 6px;border-color: #eee #eee #eee #aa1e2d; border-style: solid; font-family: monospace;">2014-06-16 18:32:49,403 - app.py:36 - INFO - logger initialized</code></pre>
+<pre><code style="padding: 0.5em 0 0.5em 1em; border-radius: 6px; border-width: 1px 1px 1px 6px;border-color: #eee #eee #eee #aa1e2d; border-style: solid; font-family: monospace;">2014-06-16 18:49:59,275 - app.py:36 - INFO - logger initialized</code></pre>
