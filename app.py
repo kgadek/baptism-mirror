@@ -7,6 +7,7 @@ import os
 from os import environ as env
 import bottle
 from bottle import request, response, get, post, HTTPResponse
+import requests
 
 
 bottle.debug(True)
@@ -52,4 +53,20 @@ def example_get(doc_id):
     return HTTPResponse("No such file!", status=400)
 
 
+def get_data(number_of_data, timespan):
+    data = []
+    for _ in range(number_of_data):
+        post_payload = {'config': '1', 'timespan': timespan}
+        post_request = requests.post("http://immense-refuge-2812.herokuapp.com/sample/learn", params=post_payload)
+        if post_request.status_code == 200:
+            get_request = requests.get("http://immense-refuge-2812.herokuapp.com/sample/learn?config=1")
+            if get_request.status_code == 200:
+                new_data = get_request.json()['series']
+                for x in new_data:
+                    x.pop('name')
+                data.append(new_data)
+    return data
+
+
 bottle.run(host='0.0.0.0', port=argv[1])
+#print(get_data(10, 10))
