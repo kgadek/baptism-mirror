@@ -12,6 +12,12 @@ import requests
 
 bottle.debug(True)
 
+
+number_of_data = 10
+timespan = 10
+threshold = 0.5
+
+
 @get('/')
 def index():
     response.content_type = 'text/plain; charset=utf-8'
@@ -71,6 +77,11 @@ def get_segment(timespan):
     return data
 
 
+def get_types(data):
+    return {x['type'] for subdata in data for x in subdata}
 
-#bottle.run(host='0.0.0.0', port=argv[1])
-print(get_data(10, 10))
+
+bottle.run(host='0.0.0.0', port=argv[1])
+#data = get_data(number_of_data, timespan)
+#print(data)
+#print(get_types(data))
