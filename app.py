@@ -8,14 +8,15 @@ from os import environ as env
 import bottle
 from bottle import request, response, get, post, HTTPResponse
 import requests
+import itertools
 
 
 bottle.debug(True)
 
 
-number_of_data = 3
-timespan = 2
-threshold = 0.5
+NUMBER_OF_DATA = 10
+TIMESPAN = 3
+THRESHOLD = 0.9
 
 
 @get('/')
@@ -76,11 +77,51 @@ def get_segment(timespan):
 
 
 def get_types(data):
-    return {x for subdata in data for x in subdata}
+    return {tuple([x]) for subdata in data for x in subdata}
+
+
+def generate_candidates(types):
+    to_return = {
+        t1 + (t2[-1],)
+        for t1, t2 in itertools.product(types, types)
+        if t1[:-1] == t2[:-1]
+    }
+    return to_return
+
+
+def find_frequent_sequences(candidates, data, threshold):
+    threshold *= len(data)
+    to_return = {
+        c for c in candidates
+        if sum([exists_in(c, d) for d in data]) > threshold
+    }
+    return to_return
+
+
+def exists_in(sequence, data):
+    for d in data:
+        if d == sequence[0]:
+            sequence = sequence[1:]
+            if len(sequence) == 0:
+                return True
+    return False
+
+
+def get_sequences(types, data, threshold):
+    to_return = set()
+    sequences = types
+    while(len(sequences)) > 0:
+        print(len(sequences))
+        candidates = generate_candidates(sequences)
+        sequences = find_frequent_sequences(candidates, data, threshold)
+        to_return.update(sequences)
+    return to_return
 
 
 #bottle.run(host='0.0.0.0', port=argv[1])
-data = get_data(number_of_data, timespan)
+data = get_data(NUMBER_OF_DATA, TIMESPAN)
 print(data)
 types = get_types(data)
 print(types)
+
+print(get_sequences(types, data, THRESHOLD))
