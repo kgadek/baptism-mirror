@@ -13,8 +13,8 @@ import requests
 bottle.debug(True)
 
 
-number_of_data = 10
-timespan = 10
+number_of_data = 3
+timespan = 2
 threshold = 0.5
 
 
@@ -72,16 +72,15 @@ def get_segment(timespan):
     if get_request.status_code != 200:
         raise Exception()
     data = get_request.json()['series']
-    for x in data:
-        x.pop('name')
-    return data
+    return [x['type'] for x in data]
 
 
 def get_types(data):
-    return {x['type'] for subdata in data for x in subdata}
+    return {x for subdata in data for x in subdata}
 
 
-bottle.run(host='0.0.0.0', port=argv[1])
-#data = get_data(number_of_data, timespan)
-#print(data)
-#print(get_types(data))
+#bottle.run(host='0.0.0.0', port=argv[1])
+data = get_data(number_of_data, timespan)
+print(data)
+types = get_types(data)
+print(types)
