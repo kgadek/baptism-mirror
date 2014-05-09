@@ -107,14 +107,24 @@ def exists_in(sequence, data):
     return False
 
 
+def update_set(to_return, sequences):
+    for s in sequences:
+        for i in range(len(s)):
+            try:
+                to_return.remove(s[:i] + s[i + 1:])
+            except KeyError:
+                pass
+    to_return.update(sequences)
+    return to_return
+
+
 def get_sequences(types, data, threshold):
     to_return = set()
     sequences = types
     while(len(sequences)) > 0:
-        print(len(sequences))
         candidates = generate_candidates(sequences)
         sequences = find_frequent_sequences(candidates, data, threshold)
-        to_return.update(sequences)
+        to_return = update_set(to_return, sequences)
     return to_return
 
 
@@ -122,6 +132,6 @@ def get_sequences(types, data, threshold):
 data = get_data(NUMBER_OF_DATA, TIMESPAN)
 print(data)
 types = get_types(data)
-print(types)
+#print(types)
 
 print(get_sequences(types, data, THRESHOLD))
