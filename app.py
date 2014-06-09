@@ -52,7 +52,7 @@ def pushed_ztis_data():
     data = request.json
     types = get_types(data)
     res = get_sequences(types, data, THRESHOLD)
-    old_data.append(res)
+    old_data.append({"data": data, "result": res})
     with open("res.txt", "wb") as fh:
         pickle.dump(old_data, fh)
 
