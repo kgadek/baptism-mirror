@@ -46,10 +46,13 @@ def example_post(doc_id):
     doc_file = os.path.join("tmp", doc_id)
 
     with open(doc_file, "w") as fh:
+        fh.write("=====AAA=====")
         content = request.forms.get('content')[0:100]
+        fh.write("=====BBB=====")
         fh.write(content)
-        fh.write("=====DUPA=====")
+        fh.write("=====CCC=====")
         fh.write(request.json)
+        fh.write("=====DDD=====")
 
 
 @get('/example_get/<doc_id>')
