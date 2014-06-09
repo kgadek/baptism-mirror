@@ -130,10 +130,10 @@ def get_sequences(types, data, threshold):
     return to_return
 
 
-#bottle.run(host='0.0.0.0', port=argv[1])
-data = get_data(NUMBER_OF_DATA, TIMESPAN)
-print(data)
-types = get_types(data)
-#print(types)
-
-print(get_sequences(types, data, THRESHOLD))
+bottle.run(host='0.0.0.0', port=argv[1])
+# data = get_data(NUMBER_OF_DATA, TIMESPAN)
+# print(data)
+# types = get_types(data)
+##print(types)
+#
+# print(get_sequences(types, data, THRESHOLD))
