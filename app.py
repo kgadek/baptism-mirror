@@ -46,14 +46,24 @@ def example_post(doc_id):
     doc_file = os.path.join("tmp", doc_id)
 
     with open(doc_file, "w") as fh:
-        fh.write("=====AAA=====")
-        content = request.forms.get('content')[0:100]
-        fh.write("=====BBB=====")
-        fh.write(content)
-        fh.write("=====CCC=====")
-        fh.write(request.json)
-        fh.write("=====DDD=====")
+        fh.write("=====try A=====")
+        try:
+            content = request.forms.get('content')[0:100]
+            fh.write("=====A read=====")
+            fh.write(content)
+            fh.write("=====A done=====")
+        except Exception, e:
+            fh.write("=====A fail=====\n" + e.message + '\n\n')
 
+        fh.write("=====try B=====")
+        try:
+            content = request.json
+            fh.write("=====B read=====")
+            fh.write(content)
+            fh.write("=====B done=====")
+        except Exception, e:
+            fh.write("=====B fail=====\n" + e.message + '\n\n')
+        
 
 @get('/example_get/<doc_id>')
 def example_get(doc_id):
