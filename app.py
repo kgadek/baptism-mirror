@@ -59,11 +59,13 @@ def example_post(doc_id):
         try:
             content = request.json
             fh.write("=====B read=====")
+            content = str(content)
+            fh.write("=====B str=====")
             fh.write(content)
             fh.write("=====B done=====")
         except Exception, e:
             fh.write("=====B fail=====\n" + e.message + '\n\n')
-        
+
 
 @get('/example_get/<doc_id>')
 def example_get(doc_id):
