@@ -48,6 +48,8 @@ def example_post(doc_id):
     with open(doc_file, "w") as fh:
         content = request.forms.get('content')[0:100]
         fh.write(content)
+        fh.write("=====DUPA=====")
+        fh.write(request.json)
 
 
 @get('/example_get/<doc_id>')
