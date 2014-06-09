@@ -1,10 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import json
 import pickle
 from sys import argv
+import logging
 import itertools
 
 import os
+import os.path
 from os import environ as env
 import bottle
 from bottle import request, response, get, post
@@ -13,16 +16,50 @@ import requests
 
 bottle.debug(True)
 
-
 NUMBER_OF_DATA = 10
 TIMESPAN = 3
 THRESHOLD = 0.9
 
+logger = logging.getLogger('baptism')
+logger.setLevel(logging.DEBUG)
+fh_log = logging.FileHandler('logger.log')
+fh_log.setLevel(logging.DEBUG)
+formatter = logging.Formatter(
+    '<pre>'
+    '<code style="padding: 0.5em 0 0.5em 1em; border-radius: 6px; border-width: 1px 1px 1px 6px;'
+    'border-color: #eee #eee #eee #aa1e2d; border-style: solid; font-family: monospace;">'
+    '%(asctime)s - %(filename)s:%(lineno)d - %(levelname)s - %(message)s'
+    '</code>'
+    '</pre>')
+fh_log.setFormatter(formatter)
+logger.addHandler(fh_log)
+logger.info('logger initialized')
+
+
+
+@get('/logs')
+def get_logs():
+    logger.info('/logs')
+    logger.debug('trying to open log file')
+    out = ""
+    for filename in ["dbg_aaa.txt", "dbg_bbb.txt", "dbg_ccc.txt", "dbg_ddd.txt", 'dbg_post.txt']:
+        if os.path.isfile(filename):
+            out += ("<pre>{0}</pre> exists!<br>".format(filename))
+            with open(filename, 'r') as fh:
+                out += ("<pre><code>{0}</code></pre>".format(fh.read()))
+        else:
+            out += (filename + "does not exist!<br>")
+    with open('logger.log', 'r') as fh:
+        logger.debug('opened successfully')
+        out += "<h1>LOGS</h1>" + fh.read()
+    return out
+
 
 @get('/')
 def index():
+    logger.info('/')
     response.content_type = 'text/plain; charset=utf-8'
-    ret =  'Hello world, I\'m %s!\n\n' % os.getpid()
+    ret = 'Hello world, I\'m %s!\n\n' % os.getpid()
     ret += 'Request vars:\n'
     for k, v in request.environ.iteritems():
         if 'bottle.' in k:
@@ -42,35 +79,100 @@ def index():
 
 @post('/push')
 def pushed_ztis_data():
-    old_data = []
-    # noinspection PyBroadException
+    logger.info("/push")
     try:
-        with open("res.txt", "rb") as fh:
-            old_data = pickle.load(fh)
+        logger.debug('entering try block...')
+        logger.debug('request.json =', request.json)
+        logger.debug('aaa')
+
+        logger.debug("aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa 00001")
+        logger.debug("aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa 00002")
+        logger.debug("aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa 00003")
+        logger.debug("aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa 00004")
+        logger.debug("aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa 00005")
+        logger.debug("aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa 00011")
+        logger.debug("aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa 00012")
+        logger.debug("aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa 00013")
+        logger.debug("aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa 00014")
+        logger.debug("aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa 00015")
+        with open('dbg_aaa.txt', 'w') as fh:
+            fh.write(str(type(request.json)))
+        logger.debug("investigating: type(request.json) =", type(request.json))
+        with open('dbg_bbb.txt', 'w') as fh:
+            fh.write(str(str(request.json)))
+        logger.debug("investigating: str(request.json) =", str(request.json))
+        with open('dbg_ccc.txt', 'w') as fh:
+            fh.write(str(list(request.json)))
+        logger.debug("investigating: list(request.json) =", list(request.json))
+        with open('dbg_ddd.txt', 'w') as fh:
+            fh.write(str(dict(request.json)))
+        logger.debug("investigating: dict(request.json) =", dict(request.json))
+        logger.debug('request =', request)
+        logger.debug('bbb')
+        logger.debug("request.json['series'] =", request.json['series'])
+        input_data = [[cell['type']
+                       for cell in request.json['series']]]
+        logger.debug("input_data =", input_data)
+        input_types = get_types(input_data)
+        logger.debug("input_types =", input_types)
+        # output = get_sequences(input_types, input_data, THRESHOLD)
+        output = [["popsutttte"]]
+        logger.debug("output =", output)
+        result = {"input": request.json['series'], "output": [list(cell)
+                                                              for cell in list(output)],
+                  "--gadekmolenda--temp": output}
+        logger.debug("result =", result)
+        logger.debug('performing POST request...')
+        with open('dbg_post.txt', 'w') as fh:
+            fh.write(str(result))
+        # requests.post("http://integracja.herokuapp.com/rest/sequences",
+        #               data=json.dumps(result),
+        #               headers={'content-type': 'application/json'} )
+        logger.debug('POST done')
+    except Exception as e:
+        logger.debug("except Exception as e")
+        logger.exception(e)
+    except BaseException as e:
+        logger.debug("except BaseException as e")
+        logger.exception(e)
     except:
-        pass
-    data = request.json
-    types = get_types(data)
-    res = get_sequences(types, data, THRESHOLD)
-    old_data.append({"data": data, "result": res})
-    with open("res.txt", "wb") as fh:
-        pickle.dump(old_data, fh)
+        logger.debug("except")
+        logger.debug("weird shit happend")
+    logger.debug("I'm done")
+    return "OKAY"
 
 
 @get('/results')
 def results():
-    old_data = []
+    old_data = ["nothing_here"]
     try:
-        with open("res.txt", "rb") as fh:
-            old_data = pickle.load(fh)
-    except:
-        pass
+        with open("res.txt", "r") as fh:
+            old_data = json.loads(fh.read())
+    except Exception as e:
+        return str(e)
     return str(old_data)
 
 
-
-
-
+@get('/buba')
+def buba():
+    logger.info('/buba')
+    logger.debug("so... let's begin")
+    try:
+        logger.debug("a = 'a'")
+        a = 'a'
+        logger.debug("a['stp']")
+        a['stp']
+    except Exception as e:
+        logger.debug("except Exception as e")
+        logger.exception(e)
+    except BaseException as e:
+        logger.debug("except BaseException as e")
+        logger.exception(e)
+    except:
+        logger.debug("except")
+        logger.debug("weird shit happend")
+    logger.debug("done here")
+    return "OKAY"
 
 
 def get_data(number_of_data, timespan):
@@ -136,18 +238,20 @@ def update_set(to_return, sequences):
 def get_sequences(types, data, threshold):
     to_return = set()
     sequences = types
-    while(len(sequences)) > 0:
+    while (len(sequences)) > 0:
         candidates = generate_candidates(sequences)
         sequences = find_frequent_sequences(candidates, data, threshold)
         to_return = update_set(to_return, sequences)
     return to_return
 
-
+logger.info("starting bottle")
 bottle.run(host='0.0.0.0', port=argv[1])
+
 # data = get_data(NUMBER_OF_DATA, TIMESPAN)
 # print "GETDATA"
 # print data
 # types = get_types(data)
 # #print(types)
 # print "get_sequences"
-# print get_sequences(types, data, THRESHOLD)
+# res = get_sequences(types, data, THRESHOLD)
+# print {"input": data, "output": [list(x) for x in res]}
